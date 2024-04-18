@@ -17,17 +17,16 @@ public class SmoothHealthBar : HealthBar
 
     private IEnumerator ShiftingSlowlyValueSlider()
     {
-        float valueTarget = GetValueHealthForSlider(CurrentHealthPlayer, MaxHealthPlayer);
-        float waitTime = 0.05f;
-        float speedFillHealthBar = 2f;
-
-        WaitForSeconds wait = new WaitForSeconds(waitTime);
+        float valueTarget = GetValueHealthForSlider();
+        float speedFillHealthBar = 1f;
 
         while (Slider.value != valueTarget)
         {
-            Slider.value = Mathf.MoveTowards(Slider.value, GetValueHealthForSlider(CurrentHealthPlayer, MaxHealthPlayer), speedFillHealthBar * Time.deltaTime);
+            float currentSliderValue = Slider.value;
 
-            yield return wait;
+            Slider.value = Mathf.MoveTowards(currentSliderValue, valueTarget, speedFillHealthBar * Time.deltaTime);
+
+            yield return null;
         }
     }
 }

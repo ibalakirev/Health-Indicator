@@ -10,8 +10,6 @@ public abstract class HealthBar : MonoBehaviour
     private Slider _slider;
     public Slider Slider => _slider;
     public Health Player => _player;
-    public float CurrentHealthPlayer => _player.CurrentHealthCharacter;
-    public float MaxHealthPlayer => _player.MaxHealthCharacter;
 
     private void Start()
     {
@@ -30,8 +28,8 @@ public abstract class HealthBar : MonoBehaviour
 
     public abstract void ChangeHealthBar();
 
-    public float GetValueHealthForSlider(float currentHealth, float maxHealth)
+    public float GetValueHealthForSlider()
     {
-        return currentHealth / maxHealth;
+        return _player.CurrentHealthCharacter / _player.MaxHealthCharacter;
     }
 }

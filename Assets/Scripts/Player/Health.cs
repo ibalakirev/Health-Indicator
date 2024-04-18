@@ -11,16 +11,16 @@ public class Health : MonoBehaviour
     public float MaxHealthCharacter => _maxHealth;
 
     public event Action HealthChanged;
+    public event Action CharacterKill;
 
     public void ReduceHealth(float damage)
     {
-        if (IsAlive())
+        if (IsAlive(damage))
         {
-            _currentHealth -= damage;
+            float multiplierÌalueDamage = -1;
+            float valueDamage = damage * multiplierÌalueDamage;
 
-            LimitHealth();
-
-            HealthChanged?.Invoke();
+            ChangeHealthCharacter(valueDamage);
 
             TryDie();
         }
@@ -28,21 +28,28 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(float healthMedkit)
     {
-        if (IsAlive())
+        if (IsAlive(healthMedkit))
         {
-            _currentHealth += healthMedkit;
-
-            LimitHealth();
+            ChangeHealthCharacter(healthMedkit);
 
             HealthChanged?.Invoke();
         }
+    }
+
+    private void ChangeHealthCharacter(float health)
+    {
+        _currentHealth += health;
+
+        LimitHealth();
+
+        HealthChanged?.Invoke();
     }
 
     private void TryDie()
     {
         if (_currentHealth <= _minHealth)
         {
-            gameObject.SetActive(false);
+            CharacterKill?.Invoke();
         }
     }
 
@@ -51,9 +58,11 @@ public class Health : MonoBehaviour
         _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
     }
 
-    private bool IsAlive()
+    private bool IsAlive(float valueIncoming)
     {
-        return true && (_currentHealth > _minHealth);
+        float minValueIncoming = 0;
+
+        return _currentHealth > _minHealth && valueIncoming >= minValueIncoming;
     }
 }
 

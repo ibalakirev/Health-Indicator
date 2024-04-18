@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 
-public class TextHealthBar : MonoBehaviour
+public class TextHealthBar : HealthBar
 {
     [SerializeField] private Health _healthPlayer;
 
@@ -16,18 +16,8 @@ public class TextHealthBar : MonoBehaviour
         ChangeHealthBar();
     }
 
-    private void OnEnable()
+    public override void ChangeHealthBar()
     {
-        _healthPlayer.HealthChanged += ChangeHealthBar;
-    }
-
-    private void OnDisable()
-    {
-        _healthPlayer.HealthChanged -= ChangeHealthBar;
-    }
-
-    private void ChangeHealthBar()
-    {
-        _textHealth.text = $"{_healthPlayer.CurrentHealthCharacter}/{_healthPlayer.MaxHealthCharacter}"; 
+        _textHealth.text = $"{_healthPlayer.CurrentHealthCharacter}/{_healthPlayer.MaxHealthCharacter}";
     }
 }
