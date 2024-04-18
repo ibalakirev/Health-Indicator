@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
 
     public void ReduceHealth(float damage)
     {
-        if (IsAlive() == true)
+        if (IsAlive())
         {
             _currentHealth -= damage;
 
@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(float healthMedkit)
     {
-        if (IsAlive() == true)
+        if (IsAlive())
         {
             _currentHealth += healthMedkit;
 
@@ -53,14 +53,7 @@ public class Health : MonoBehaviour
 
     private bool IsAlive()
     {
-        if (_currentHealth > _minHealth)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true && (_currentHealth > _minHealth);
     }
 }
 

@@ -1,34 +1,33 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-
-[RequireComponent(typeof(Slider))]
 
 public class SmoothHealthBar : HealthBar
 {
-    [SerializeField] private Health _healthPlayer;
-
-    private Slider _sliderHealthBar;
-
-    private float _speedFillHealthBar = 1f;
-
-    private void Start()
-    {
-        _sliderHealthBar = GetComponent<Slider>();
-    }
-
-    private void OnEnable()
-    {
-        _healthPlayer.HealthChanged += ChangeHealthBar;
-    }
-
-    private void OnDisable()
-    {
-        _healthPlayer.HealthChanged -= ChangeHealthBar;
-    }
+    private Coroutine _coroutineSlider;
 
     public override void ChangeHealthBar()
     {
-        _sliderHealthBar.value = Mathf.MoveTowards(GetValueHealthForSlider(_healthPlayer.CurrentHealthCharacter, _healthPlayer.MaxHealthCharacter),
-            GetValueHealthForSlider(_healthPlayer.MaxHealthCharacter, _healthPlayer.MaxHealthCharacter), _speedFillHealthBar * Time.deltaTime);
+        if(_coroutineSlider != null)
+        {
+            StopCoroutine(_coroutineSlider);
+        }
+
+        _coroutineSlider = StartCoroutine(ShiftingSlowlyValueSlider());
+    }
+
+    private IEnumerator ShiftingSlowlyValueSlider()
+    {
+        float valueTarget = GetValueHealthForSlider(CurrentHealthPlayer, MaxHealthPlayer);
+        float waitTime = 0.05f;
+        float speedFillHealthBar = 2f;
+
+        WaitForSeconds wait = new WaitForSeconds(waitTime);
+
+        while (Slider.value != valueTarget)
+        {
+            Slider.value = Mathf.MoveTowards(Slider.value, GetValueHealthForSlider(CurrentHealthPlayer, MaxHealthPlayer), speedFillHealthBar * Time.deltaTime);
+
+            yield return wait;
+        }
     }
 }
