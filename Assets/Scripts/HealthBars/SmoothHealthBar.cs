@@ -1,42 +1,35 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(SliderBar))]
-
-public class SmoothHealthBar : HealthBar
+public class SmoothHealthBar : StandartHealthBar
 {
-    private SliderBar _slider;
     private Coroutine _coroutineSlider;
-
-    private void Start()
-    {
-        _slider = GetComponent<SliderBar>();
-    }
 
     protected override void ChangeValueIndicator()
     {
-        if(_coroutineSlider != null)
+        if (_coroutineSlider != null)
         {
             StopCoroutine(_coroutineSlider);
         }
 
-        _coroutineSlider = StartCoroutine(ShiftingSlowlyValueSlider());
+        _coroutineSlider = StartCoroutine(ShiftSlowlyValueSlider());
     }
 
-    private IEnumerator ShiftingSlowlyValueSlider()
+    private IEnumerator ShiftSlowlyValueSlider()
     {
+        float valueSlider = Slider.value;
         float valueTarget = GetCurrentValueForSlider();
-        float speedFillHealthBar = 1f;
+        float speedFillHealthBar = 1f;  
+        float delay = 1f;
 
-        while (_slider.IndicatorHealthCharacter.value != valueTarget)
+        for (float i = 0; i < delay; i += speedFillHealthBar * Time.deltaTime)
         {
-            float currentSliderValue = _slider.IndicatorHealthCharacter.value;
-
-            float valueSlider = Mathf.MoveTowards(currentSliderValue, valueTarget, speedFillHealthBar * Time.deltaTime);
-
-            _slider.ChangeValueIndicator(valueSlider);
-
             yield return null;
+
+            Slider.value = Mathf.Lerp(valueSlider, valueTarget, i);
         }
+
+        Slider.value = valueTarget;
     }
 }

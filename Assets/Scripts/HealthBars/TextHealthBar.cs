@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 
-public class TextHealthBar : HealthBar
+public class TextHealthBar : IndicatorHealth
 {
     private TextMeshProUGUI _indicator;
 

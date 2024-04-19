@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class HealthBar : MonoBehaviour
+public abstract class IndicatorHealth : MonoBehaviour
 {
     [SerializeField] private Health _player;
     public Health Player => _player;

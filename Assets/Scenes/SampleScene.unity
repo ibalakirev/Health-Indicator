@@ -134,8 +134,6 @@ GameObject:
   - component: {fileID: 14870386}
   - component: {fileID: 14870389}
   - component: {fileID: 14870387}
-  - component: {fileID: 14870391}
-  - component: {fileID: 14870390}
   m_Layer: 5
   m_Name: 'SliderStandartHealthBar '
   m_TagString: Untagged
@@ -229,30 +227,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &14870390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14870385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &14870391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14870385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &425007498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,8 +1319,6 @@ GameObject:
   - component: {fileID: 1520456205}
   - component: {fileID: 1520456207}
   - component: {fileID: 1520456206}
-  - component: {fileID: 1520456208}
-  - component: {fileID: 1520456209}
   m_Layer: 5
   m_Name: SliderSmoothHealthBar
   m_TagString: Untagged
@@ -1440,30 +1412,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1520456208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520456204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1520456209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520456204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1655758841
 GameObject:
   m_ObjectHideFlags: 0

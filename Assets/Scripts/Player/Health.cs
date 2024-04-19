@@ -7,48 +7,45 @@ public class Health : MonoBehaviour
     [SerializeField] private float _minValue = 0f;
     [SerializeField] private float _maxValue = 100f;
 
+    public event Action CurrentValueChanged;
+
     public float CurrentValue => _currentValue;
     public float MaxValue => _maxValue;
-
-    public event Action CurrentValueChanged;
+    public bool IsLive => _currentValue > _minValue;
 
     public void ReduceCurrentValue(float damage)
     {
-        if (IsAlive(_currentValue, _minValue) && isIncomingValue(damage, _minValue))
+        float multiplierDamage = -1;
+        float damageValue = damage * multiplierDamage;
+
+        if (IsLive && CheckIncomingValue(damage))
         {
-            _currentValue -= damage;
-
-            LimitCurrentValue(_currentValue, _minValue, _maxValue);
-
-            CurrentValueChanged?.Invoke();
+            ChangeCurrentValue(damageValue);
         }
     }
 
     public void IncreaseCurrentValue(float healthMedkit)
     {
-        if (IsAlive(_currentValue, _minValue) && isIncomingValue(healthMedkit, _minValue))
+        if (IsLive && CheckIncomingValue(healthMedkit))
         {
-            _currentValue += healthMedkit;
-
-            LimitCurrentValue(_currentValue, _minValue, _maxValue);
-
-            CurrentValueChanged?.Invoke();
+            ChangeCurrentValue(healthMedkit);
         }
     }
 
-    private void LimitCurrentValue(float currentVAlue, float minValue, float maxVAlue)
+    private void ChangeCurrentValue(float valueIncoming)
     {
-        _currentValue = Mathf.Clamp(currentVAlue, minValue, maxVAlue);
+        _currentValue += valueIncoming;
+
+        _currentValue = Mathf.Clamp(_currentValue, _minValue, _maxValue);
+
+        CurrentValueChanged?.Invoke();
     }
 
-    private bool IsAlive(float currentValue, float minValue)
+    private bool CheckIncomingValue(float valueIncoming)
     {
-        return currentValue > minValue;
-    }
+        float minValueIncoming = 0f;
 
-    private bool isIncomingValue(float valueIncoming, float minValue)
-    {
-        return valueIncoming >= minValue;
+        return valueIncoming > minValueIncoming;
     }
 }
 
