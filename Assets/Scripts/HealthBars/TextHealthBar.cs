@@ -5,19 +5,17 @@ using UnityEngine;
 
 public class TextHealthBar : HealthBar
 {
-    [SerializeField] private Health _healthPlayer;
-
-    private TextMeshProUGUI _textHealth;
+    private TextMeshProUGUI _indicator;
 
     private void Start()
     {
-        _textHealth = GetComponent<TextMeshProUGUI>();
+        _indicator = GetComponent<TextMeshProUGUI>();
 
-        ChangeHealthBar();
+        ChangeValueIndicator();
     }
 
-    public override void ChangeHealthBar()
+    protected override void ChangeValueIndicator()
     {
-        _textHealth.text = $"{_healthPlayer.CurrentHealthCharacter}/{_healthPlayer.MaxHealthCharacter}";
+        _indicator.text = $"{Player.CurrentValue}/{Player.MaxValue}";
     }
 }

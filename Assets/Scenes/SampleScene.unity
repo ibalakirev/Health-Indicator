@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 14870386}
   - component: {fileID: 14870389}
   - component: {fileID: 14870387}
+  - component: {fileID: 14870391}
+  - component: {fileID: 14870390}
   m_Layer: 5
   m_Name: 'SliderStandartHealthBar '
   m_TagString: Untagged
@@ -227,6 +229,30 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &14870390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14870385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &14870391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14870385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &425007498
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +338,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1655758842}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: IncreaseHealth
+        m_MethodName: IncreaseCurrentValue
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1319,6 +1345,8 @@ GameObject:
   - component: {fileID: 1520456205}
   - component: {fileID: 1520456207}
   - component: {fileID: 1520456206}
+  - component: {fileID: 1520456208}
+  - component: {fileID: 1520456209}
   m_Layer: 5
   m_Name: SliderSmoothHealthBar
   m_TagString: Untagged
@@ -1412,6 +1440,30 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1520456208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520456204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1520456209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520456204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9319c2abd4c6a146966e2490f88a957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1655758841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1655758843}
   - component: {fileID: 1655758842}
-  - component: {fileID: 1655758844}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1442,9 +1493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50585e1343ca3d41b46b6f386447157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 100
-  _minHealth: 0
-  _maxHealth: 100
+  _currentValue: 100
+  _minValue: 0
+  _maxValue: 100
 --- !u!4 &1655758843
 Transform:
   m_ObjectHideFlags: 0
@@ -1460,19 +1511,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1655758844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655758841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0a5dfc8ca70f84e8a087083a06e599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 1655758842}
 --- !u!1 &1699294600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1774,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1655758842}
-  _healthPlayer: {fileID: 1655758842}
 --- !u!114 &1948781857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2084,7 +2121,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1655758842}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: ReduceHealth
+        m_MethodName: ReduceCurrentValue
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

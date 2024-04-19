@@ -1,9 +1,20 @@
-using UnityEngine.UI;
+using UnityEngine;
+
+[RequireComponent(typeof(SliderBar))]
 
 public class StandartHealthBar : HealthBar
 {
-    public override void ChangeHealthBar()
+    private SliderBar _slider;
+
+    private void Start()
     {
-        Slider.value = GetValueHealthForSlider();
+        _slider = GetComponent<SliderBar>();
+    }
+
+    protected override void ChangeValueIndicator()
+    {
+        float valuevalueSlider = GetCurrentValueForSlider();
+
+        _slider.ChangeValueIndicator(valuevalueSlider);
     }
 }

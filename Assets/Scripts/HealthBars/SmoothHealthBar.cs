@@ -1,11 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SliderBar))]
+
 public class SmoothHealthBar : HealthBar
 {
+    private SliderBar _slider;
     private Coroutine _coroutineSlider;
 
-    public override void ChangeHealthBar()
+    private void Start()
+    {
+        _slider = GetComponent<SliderBar>();
+    }
+
+    protected override void ChangeValueIndicator()
     {
         if(_coroutineSlider != null)
         {
@@ -17,14 +25,16 @@ public class SmoothHealthBar : HealthBar
 
     private IEnumerator ShiftingSlowlyValueSlider()
     {
-        float valueTarget = GetValueHealthForSlider();
+        float valueTarget = GetCurrentValueForSlider();
         float speedFillHealthBar = 1f;
 
-        while (Slider.value != valueTarget)
+        while (_slider.IndicatorHealthCharacter.value != valueTarget)
         {
-            float currentSliderValue = Slider.value;
+            float currentSliderValue = _slider.IndicatorHealthCharacter.value;
 
-            Slider.value = Mathf.MoveTowards(currentSliderValue, valueTarget, speedFillHealthBar * Time.deltaTime);
+            float valueSlider = Mathf.MoveTowards(currentSliderValue, valueTarget, speedFillHealthBar * Time.deltaTime);
+
+            _slider.ChangeValueIndicator(valueSlider);
 
             yield return null;
         }

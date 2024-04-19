@@ -3,66 +3,52 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float _currentHealth;
-    [SerializeField] private float _minHealth = 0f;
-    [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private float _currentValue;
+    [SerializeField] private float _minValue = 0f;
+    [SerializeField] private float _maxValue = 100f;
 
-    public float CurrentHealthCharacter => _currentHealth;
-    public float MaxHealthCharacter => _maxHealth;
+    public float CurrentValue => _currentValue;
+    public float MaxValue => _maxValue;
 
-    public event Action HealthChanged;
-    public event Action CharacterKill;
+    public event Action CurrentValueChanged;
 
-    public void ReduceHealth(float damage)
+    public void ReduceCurrentValue(float damage)
     {
-        if (IsAlive(damage))
+        if (IsAlive(_currentValue, _minValue) && isIncomingValue(damage, _minValue))
         {
-            float multiplierÌalueDamage = -1;
-            float valueDamage = damage * multiplierÌalueDamage;
+            _currentValue -= damage;
 
-            ChangeHealthCharacter(valueDamage);
+            LimitCurrentValue(_currentValue, _minValue, _maxValue);
 
-            TryDie();
+            CurrentValueChanged?.Invoke();
         }
     }
 
-    public void IncreaseHealth(float healthMedkit)
+    public void IncreaseCurrentValue(float healthMedkit)
     {
-        if (IsAlive(healthMedkit))
+        if (IsAlive(_currentValue, _minValue) && isIncomingValue(healthMedkit, _minValue))
         {
-            ChangeHealthCharacter(healthMedkit);
+            _currentValue += healthMedkit;
 
-            HealthChanged?.Invoke();
+            LimitCurrentValue(_currentValue, _minValue, _maxValue);
+
+            CurrentValueChanged?.Invoke();
         }
     }
 
-    private void ChangeHealthCharacter(float health)
+    private void LimitCurrentValue(float currentVAlue, float minValue, float maxVAlue)
     {
-        _currentHealth += health;
-
-        LimitHealth();
-
-        HealthChanged?.Invoke();
+        _currentValue = Mathf.Clamp(currentVAlue, minValue, maxVAlue);
     }
 
-    private void TryDie()
+    private bool IsAlive(float currentValue, float minValue)
     {
-        if (_currentHealth <= _minHealth)
-        {
-            CharacterKill?.Invoke();
-        }
+        return currentValue > minValue;
     }
 
-    private void LimitHealth()
+    private bool isIncomingValue(float valueIncoming, float minValue)
     {
-        _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
-    }
-
-    private bool IsAlive(float valueIncoming)
-    {
-        float minValueIncoming = 0;
-
-        return _currentHealth > _minHealth && valueIncoming >= minValueIncoming;
+        return valueIncoming >= minValue;
     }
 }
 
